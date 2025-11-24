@@ -24,29 +24,28 @@ Enter the code for admin.py and models.py
 Execute Django admin and create details for 10 books
 
 ## PROGRAM
-```
-<!DOCTYPE html>
-<html>
-<head>
-<title>My webserver</title>
-</head>
-<body>
-<h1>Welcome<h1>
-</body>
-</html>
-"""
-class myhandler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        print("request received")
-        self.send_response(200)
-        self.send_header('content-type', 'text/html; charset=utf-8')
-        self.end_headers()
-        self.wfile.write(content.encode())
-server_address = ('',80)
-httpd = HTTPServer(server_address,myhandler)
-print("my webserver is running...")
-httpd.serve_forever()
 
+models.py
+```
+
+from django.db import models 
+from django.contrib import admin
+class amazon_DB (models.Model):
+     Product_name=models.CharField(max_length=20)
+     S_no=models.IntegerField (primary_key=True)
+     Product_type=models.CharField(max_length=20)
+     Price=models.CharField(max_length=20)
+     Year=models.IntegerField()
+class amazon_DBAdmin(admin.ModelAdmin):
+     list_display=["Product_name","S_no","Product_type","Price","Year"]
+```
+
+admin.py
+
+```
+from django.contrib import admin
+from .models import amazon_DB,amazon_DBAdmin
+admin.site.register(amazon_DB,amazon_DBAdmin)
 ```
 ## OUTPUT
 
